@@ -25,6 +25,8 @@ const Create = () => {
   const [url, setUrl] = useState("");
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
+  const allowedCharacters = /^[a-zA-Z0-9]+$/;
+
   return (
     <main>
       <Link href="/">Back to home</Link>
@@ -35,6 +37,11 @@ const Create = () => {
           <form>
             <label htmlFor="url">URL</label>
             <input
+              onKeyPress={(e) => {
+                if (e.key === " ") {
+                  e.preventDefault();
+                }
+              }}
               placeholder="https://www.amazingwebsite.com/very-interesting-page/interesting-user"
               type="text"
               value={url}
@@ -45,6 +52,11 @@ const Create = () => {
             />
             <label htmlFor="id">Slug</label>
             <input
+              onKeyPress={(e) => {
+                if (!allowedCharacters.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
               placeholder="john_doe"
               type="text"
               value={id}
