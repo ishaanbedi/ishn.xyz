@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 const Create = () => {
@@ -29,6 +30,9 @@ const Create = () => {
 
   return (
     <main>
+      <Head>
+        <title>Create a new link</title>
+      </Head>
       <Link href="/">Back to home</Link>
       <header>
         <h2>Create a new link</h2>
