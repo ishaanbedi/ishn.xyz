@@ -41,7 +41,7 @@ const Create = () => {
               onChange={(e) => {
                 setUrl(e.target.value);
               }}
-              required="true"
+              required={true}
             />
             <label htmlFor="id">Slug</label>
             <input
@@ -51,7 +51,7 @@ const Create = () => {
               onChange={(e) => {
                 setId(e.target.value);
               }}
-              required="true"
+              required={true}
             />
             <center>
               <button
