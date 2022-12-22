@@ -17,17 +17,21 @@ const Create = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      alert("Link created successfully! Accessible at ishn.xyz/" + id);
-      setUrl("");
-      setId("");
+      document.getElementById("myModal").showModal();
     }
     setLoading(false);
   };
   const [url, setUrl] = useState("");
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
-  const allowedCharacters = /^[a-zA-Z0-9]+$/;
-
+  const allowedCharacters = /^[a-zA-Z0-9_-]*$/;
+  const updateCopyButtonText = () => {
+    const copyButton = document.querySelector(".copy-button");
+    copyButton.innerHTML = "Copied!";
+    setTimeout(() => {
+      copyButton.innerHTML = "Copy link";
+    }, 2000);
+  };
   return (
     <main>
       <Head>
@@ -35,6 +39,43 @@ const Create = () => {
       </Head>
       <Link href="/">Back to home</Link>
       <header>
+        <dialog className="modal" id="myModal">
+          <p>
+            Link created successfully!
+            <br /> Accessible at{" "}
+            <Link target={"_blank"} href={`https://ishn.xyz/${id}`}>
+              ishn.xyz/{id}
+            </Link>
+          </p>
+
+          <center>
+            <button
+              onClick={() => {
+                setUrl("");
+                setId("");
+                document.getElementById("myModal").close();
+              }}
+            >
+              Create More
+            </button>
+            <span
+              style={{
+                display: "inline-block",
+                width: "1rem",
+              }}
+            ></span>
+            <button
+              className="copy-button"
+              onClick={() => {
+                updateCopyButtonText();
+                navigator.clipboard.writeText(`https://ishn.xyz/${id}`);
+              }}
+            >
+              Copy link
+            </button>
+          </center>
+        </dialog>
+
         <h2>Create a new link</h2>
         <p>Enter the URL and slug for the new link:</p>
         <section>
