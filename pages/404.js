@@ -13,7 +13,7 @@ const Custom404 = () => {
           Maybe that slug is available. Try creating a new link{" "}
           <Link
             href={{
-              pathname: "/create",
+              pathname: "/",
             }}
           >
             here

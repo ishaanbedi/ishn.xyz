@@ -1,7 +1,7 @@
 {
-  "databaseURL": "https://Ishaan-Bedi-s-workspace-tbb9k6.us-east-1.xata.sh/db/ishn_xyz",
+  "databaseURL": "https://Ishaan-Bedi-s-workspace-tbb9k6.us-east-1.xata.sh/db/ishn_xyz_dev",
   "codegen": {
-    "output": "util/xata.js",
+    "output": "src/xata.js",
     "moduleType": "esm"
   }
 }

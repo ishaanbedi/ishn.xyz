@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@xata.io/client": "^0.21.5",
+    "@next-auth/xata-adapter": "^0.2.0",
+    "@xata.io/client": "^0.21.6",
+    "axios": "^1.2.1",
     "next": "13.0.7",
+    "next-auth": "^4.18.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

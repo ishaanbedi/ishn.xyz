@@ -11,7 +11,7 @@ const Shorter = () => {
 export default Shorter;
 export const getServerSideProps = async (context) => {
   const xata = getXataClient();
-  var data = await xata.db.lnk.getAll();
+  var data = await xata.db.links.getAll();
   data = data.filter(
     (item) => item.slug.toLowerCase() === context.params.id.toLowerCase()
   );
