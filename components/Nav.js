@@ -33,12 +33,25 @@ const Nav = () => {
         </ul>
         <ul>
           <li>
-            <Link href="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <a style={{ cursor: "pointer" }} onClick={() => signOut()}>
-              Logout
-            </a>
+            <span
+              style={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              My Account
+            </span>
+            <ul>
+              <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <a style={{ cursor: "pointer" }} onClick={() => signOut()}>
+                  Logout
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
