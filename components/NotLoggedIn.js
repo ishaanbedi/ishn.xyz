@@ -128,8 +128,8 @@ const NotLoggedIn = () => {
             </a>{" "}
             to get more features like links with custom slugs, dashboard with
             analytics, and more, for free!
-            <br/>
-            <Link href="/dashboard/report">Report an issue</Link>
+            <br />
+            <Link href="/dashboard/report">Disclaimer</Link>
           </h5>
         </main>
       </section>
