@@ -16,15 +16,20 @@ const handler = async (req, res) => {
     res.status(400).json({ error: "Missing URL. Please try again." });
     return;
   }
-  var data = await xata.db.global_slugs.getAll();
+  var data = await xata.db.global_data.getAll();
   data = data.filter((item) => item.slug === slug);
   if (data.length > 0) {
-    res.status(400).json({ error: "Slug already exists. Please try again." });
+    res
+      .status(400)
+      .json({
+        error:
+          "Slug already exists. Please try again. Leave the slug field blank to generate a random slug.",
+      });
     return;
   }
   if (!slug) {
     var randomSlug = generateRandomSlug();
-    var data = await xata.db.links.getAll();
+    var data = await xata.db.global_data.getAll();
     data = data.filter((item) => item.slug === randomSlug);
     if (data.length > 0) {
       randomSlug = generateRandomSlug();
@@ -35,32 +40,12 @@ const handler = async (req, res) => {
     res.status(400).json({ error: "Missing email. Something went wrong." });
     return;
   }
-  var data = await xata.db.links.getAll();
-  const records = await xata.db.links.getAll();
-  const record = records.find((r) => r.email === email);
-  if (!record) {
-    await xata.db.links.create({
-      email: email,
-      user_links: "[]",
-    });
-  }
-  var userLinks = record.user_links;
-  if (userLinks) {
-    userLinks = JSON.parse(userLinks);
-  } else {
-    userLinks = [];
-  }
-  userLinks.push({
+  await xata.db.global_data.create({
     slug: slug,
     url: url,
-  });
-  userLinks = JSON.stringify(userLinks);
-  await xata.db.links.update(record.id, {
+    registered: true,
     email: email,
-    user_links: userLinks,
-  });
-  await xata.db.global_slugs.create({
-    slug: slug,
+    views: 0,
   });
   res.status(200).json({ slug: slug, success: true });
 };

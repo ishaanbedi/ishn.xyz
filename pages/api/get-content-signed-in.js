@@ -6,8 +6,8 @@ const handler = async (req, res) => {
     res.status(400).json({ error: "Missing email" });
     return;
   }
-  const records = await xata.db.links.getAll();
-  const filtered = records.filter((record) => record.email === params.email);
-  res.status(200).json(filtered[0].user_links);
+  const records = await xata.db.global_data.getAll();
+  var filteredRecords = records.filter((r) => r.email === params.email);
+  res.status(200).json(filteredRecords);
 };
 export default handler;

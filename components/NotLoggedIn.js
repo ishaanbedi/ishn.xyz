@@ -4,6 +4,9 @@ import axios from "axios";
 import Nav from "./Nav";
 import { signIn } from "next-auth/react";
 import Footer from "../components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 const NotLoggedIn = () => {
   var isValidURL = (str) => {
     try {
@@ -16,7 +19,7 @@ const NotLoggedIn = () => {
   const createInDB = async () => {
     setLoading(true);
     if (!isValidURL(url)) {
-      alert("Please enter a valid URL");
+      notifyForInvalidURL();
       setLoading(false);
       return;
     }
@@ -24,15 +27,34 @@ const NotLoggedIn = () => {
       url: url,
     });
     if (res.data.success) {
-      setUrl("");
-      alert(
-        `Link created successfully! Your link is https://ishn.xyz/${res.data.record.slug}`
-      );
+      document.getElementById("myModal").showModal();
+      setSlug(res.data.slug);
     }
     setLoading(false);
   };
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [slug, setSlug] = useState("");
+  const notifyForInvalidURL = () =>
+    toast.warn("Please enter a valid URL.", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  const updateCopyButtonText = () => {
+    const copyButton = document.querySelector(".copy-button");
+    copyButton.innerHTML = "Copied!";
+    copyButton.disabled = true;
+    setTimeout(() => {
+      copyButton.innerHTML = `Copy Link`;
+      copyButton.disabled = false;
+    }, 2000);
+  };
   return (
     <>
       <section>
@@ -40,6 +62,42 @@ const NotLoggedIn = () => {
           <title>ishn.xyz | Link Shortener</title>
         </Head>
         <main>
+          <dialog className="modal" id="myModal">
+            <center>
+              <h1>Link created successfully!</h1>
+              <h4>
+                <br /> Accessible at{" "}
+                <Link target={"_blank"} href={`https://ishn.xyz/${slug}`}>
+                  ishn.xyz/{slug}
+                </Link>
+              </h4>
+              <center>
+                <button
+                  onClick={() => {
+                    setUrl("");
+                    document.getElementById("myModal").close();
+                  }}
+                >
+                  Create More
+                </button>
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "1rem",
+                  }}
+                ></span>
+                <button
+                  className="copy-button"
+                  onClick={() => {
+                    updateCopyButtonText();
+                    navigator.clipboard.writeText(`https://ishn.xyz/${slug}`);
+                  }}
+                >
+                  Copy link
+                </button>
+              </center>
+            </center>
+          </dialog>
           <Nav />
           <h1>
             <code>ishn.xyz</code>
@@ -76,6 +134,7 @@ const NotLoggedIn = () => {
       <section>
         <Footer />
       </section>
+      <ToastContainer />
     </>
   );
 };

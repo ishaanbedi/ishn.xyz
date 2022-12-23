@@ -4,31 +4,31 @@ const Nav = () => {
   const { data: session } = useSession();
   if (!session) {
     return (
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link href="https://www.ishn.xyz/github" target={"_blank"}>
-                GitHub
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <a style={{ cursor: "pointer" }} onClick={() => signIn()}>
-                Login
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link href="/">
+              <samp>ishn.xyz</samp>
+            </Link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a style={{ cursor: "pointer" }} onClick={() => signIn()}>
+              Login
+            </a>
+          </li>
+        </ul>
+      </nav>
     );
   } else {
     return (
       <nav>
         <ul>
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/">
+              <samp>ishn.xyz</samp>
+            </Link>
           </li>
         </ul>
         <ul>
@@ -45,6 +45,9 @@ const Nav = () => {
             <ul>
               <li>
                 <Link href="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link href="/dashboard/profile">Profile</Link>
               </li>
               <li>
                 <a style={{ cursor: "pointer" }} onClick={() => signOut()}>

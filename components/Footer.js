@@ -6,7 +6,7 @@ const Footer = () => {
       <footer>
         <center>
           <p>
-            Made with ❤️ by{" "}
+            With ❤️ by{" "}
             <a rel="noreferrer" href="https://ishaanbedi.in" target="_blank">
               Ishaan Bedi
             </a>

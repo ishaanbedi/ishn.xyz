@@ -59,10 +59,18 @@ const tables = [
     ],
   },
   {
-    name: "links",
+    name: "global_data",
     columns: [
-      { name: "email", type: "email", unique: true },
-      { name: "user_links", type: "text", notNull: true, defaultValue: "[]" },
+      { name: "slug", type: "string", unique: true },
+      { name: "url", type: "text" },
+      {
+        name: "registered",
+        type: "bool",
+        notNull: true,
+        defaultValue: "false",
+      },
+      { name: "email", type: "email" },
+      { name: "views", type: "int", notNull: true, defaultValue: "0" },
     ],
   },
 ];

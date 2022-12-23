@@ -15,13 +15,10 @@ const handler = async (req, res) => {
     res.status(400).json({ error: "Missing URL. Please try again." });
     return;
   }
-  const record = await xata.db.unregistered_links.create({
+  await xata.db.global_data.create({
+    slug: slug,
     url: url,
-    slug: slug,
   });
-  await xata.db.global_slugs.create({
-    slug: slug,
-  });
-  res.status(200).json({ record, success: true });
+  res.status(200).json({ slug: slug, success: true });
 };
 export default handler;
