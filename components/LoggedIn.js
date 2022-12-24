@@ -56,6 +56,7 @@ const LoggedIn = ({ user }) => {
       });
       if (res.data.success) {
         document.getElementById("myModal").showModal();
+        setSlug(res.data.slug);
       }
     } catch (e) {
       alert(e.response.data.error);
@@ -121,6 +122,7 @@ const LoggedIn = ({ user }) => {
                 <button
                   onClick={() => {
                     setUrl("");
+                    setSlug("");
                     document.getElementById("myModal").close();
                   }}
                 >
@@ -178,7 +180,9 @@ const LoggedIn = ({ user }) => {
               }}
               type="text"
               value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+              onChange={(e) => {
+                setSlug(e.target.value);
+              }}
             />
             <button disabled={loading} type="button" onClick={createInDB}>
               {loading ? "Loading" : "Shorten"}
