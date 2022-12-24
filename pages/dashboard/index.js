@@ -28,7 +28,7 @@ const Dashboard = () => {
       <header>
         <main>
           <h1>You are not signed in</h1>
-          <Link href={"/"}>Home</Link>{" "}
+          <Link href="/">Home</Link>{" "}
         </main>
       </header>
     );
@@ -62,12 +62,13 @@ const Dashboard = () => {
                       <tr key={index}>
                         <td>
                           <Link
-                            target={"_blank"}
+                            target="_blank"
                             href={
                               link.url.startsWith("http")
                                 ? link.url
                                 : `http://${link.url}`
                             }
+                            rel="noreferrer"
                           >
                             {link.url.length > 20
                               ? link.url.substring(0, 30) + "..."
@@ -75,7 +76,11 @@ const Dashboard = () => {
                           </Link>
                         </td>
                         <td>
-                          <Link target={"_blank"} href={`/${link.slug}`}>
+                          <Link
+                            target="_blank"
+                            href={`/${link.slug}`}
+                            rel="noreferrer"
+                          >
                             {process.env.NEXT_PUBLIC_SITE_URL}/
                             {link.slug.length > 20
                               ? link.slug.substring(0, 10) + "..."
@@ -118,7 +123,7 @@ const Dashboard = () => {
             ) : (
               <>
                 <p>You have no links yet.</p>
-                <Link href={"/"}>Create one now</Link>
+                <Link href="/">Create one now</Link>
               </>
             )}
           </>

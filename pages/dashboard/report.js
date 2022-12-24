@@ -8,8 +8,8 @@ const Report = () => {
         <Head>
           <title>Report</title>
         </Head>
-        <Nav/>
-        
+        <Nav />
+
         <h1>Report</h1>
         <h3>
           If you find any offensive, inappropriate, or any other kind of abusive

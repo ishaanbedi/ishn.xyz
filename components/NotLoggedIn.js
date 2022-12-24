@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 const NotLoggedIn = () => {
-  var isValidURL = (str) => {
+  const isValidURL = (str) => {
     try {
       new URL(str);
       return true;
@@ -24,7 +24,7 @@ const NotLoggedIn = () => {
       return;
     }
     const res = await axios.post("/api/new-link-signed-out", {
-      url: url,
+      url,
     });
     if (res.data.success) {
       document.getElementById("myModal").showModal();
@@ -51,7 +51,7 @@ const NotLoggedIn = () => {
     copyButton.innerHTML = "Copied!";
     copyButton.disabled = true;
     setTimeout(() => {
-      copyButton.innerHTML = `Copy Link`;
+      copyButton.innerHTML = "Copy Link";
       copyButton.disabled = false;
     }, 2000);
   };
@@ -67,7 +67,11 @@ const NotLoggedIn = () => {
               <h1>Link created successfully!</h1>
               <h4>
                 <br /> Accessible at{" "}
-                <Link target={"_blank"} href={`https://ishn.xyz/${slug}`}>
+                <Link
+                  target="_blank"
+                  href={`https://ishn.xyz/${slug}`}
+                  rel="noreferrer"
+                >
                   ishn.xyz/{slug}
                 </Link>
               </h4>
@@ -85,7 +89,7 @@ const NotLoggedIn = () => {
                     display: "inline-block",
                     width: "1rem",
                   }}
-                ></span>
+                />
                 <button
                   className="copy-button"
                   onClick={() => {

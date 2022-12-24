@@ -14,7 +14,7 @@ const handler = async (req, res) => {
     res.status(401).json({ error: "Not a signed in user." });
     return;
   }
-  var params = req.body;
+  const params = req.body;
   if (!params.email) {
     res.status(400).json({
       error: "Missing email.",
@@ -25,17 +25,18 @@ const handler = async (req, res) => {
     res.status(401).json({ error: "Not authorized." });
     return;
   }
-  var generateRandomSlug = function () {
-    var text = "";
-    var possible =
+  const generateRandomSlug = function () {
+    let text = "";
+    const possible =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 5; i++)
+    for (let i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
     return text;
   };
-  var email = req.body.email;
-  var url = req.body.url;
-  var slug = req.body.slug;
+  const email = req.body.email;
+  const url = req.body.url;
+  let slug = req.body.slug;
   if (!url) {
     res.status(400).json({ error: "Missing URL. Please try again." });
     return;
@@ -50,7 +51,7 @@ const handler = async (req, res) => {
     return;
   }
   if (!slug) {
-    var randomSlug = generateRandomSlug();
+    let randomSlug = generateRandomSlug();
     var data = await xata.db.global_data.getAll();
     data = data.filter((item) => item.slug === randomSlug);
     if (data.length > 0) {
@@ -63,12 +64,12 @@ const handler = async (req, res) => {
     return;
   }
   await xata.db.global_data.create({
-    slug: slug,
-    url: url,
+    slug,
+    url,
     registered: true,
-    email: email,
+    email,
     views: 0,
   });
-  res.status(200).json({ slug: slug, success: true });
+  res.status(200).json({ slug, success: true });
 };
 export default handler;

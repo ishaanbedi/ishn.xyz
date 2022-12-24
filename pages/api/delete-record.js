@@ -15,16 +15,16 @@ const handler = async (req, res) => {
     return;
   }
   try {
-    var slug = req.body.body.slug;
-    var calledEmail = req.body.body.email;
+    const slug = req.body.body.slug;
+    const calledEmail = req.body.body.email;
     const records = await xata.db.global_data.getAll();
-    var record = records.find((record) => record.slug === slug);
-    var email = record.email;
+    const record = records.find((record) => record.slug === slug);
+    const email = record.email;
     if (email !== calledEmail) {
       res.status(401).json({ error: "Not authorized." });
       return;
     }
-    var id = record.id;
+    const id = record.id;
     await xata.db.global_data.delete(id);
     res.status(200).json({ message: "Deleted" });
   } catch (error) {

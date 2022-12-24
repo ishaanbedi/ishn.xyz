@@ -8,24 +8,25 @@ const handler = async (req, res) => {
     });
     return;
   }
-  var generateRandomSlug = function () {
-    var text = "";
-    var possible =
+  const generateRandomSlug = function () {
+    let text = "";
+    const possible =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 5; i++)
+    for (let i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
     return text;
   };
-  var url = req.body.url;
+  const url = req.body.url;
   if (!url) {
     res.status(400).json({ error: "Missing URL. Please try again." });
     return;
   }
-  var slug = generateRandomSlug();
+  const slug = generateRandomSlug();
   await xata.db.global_data.create({
-    slug: slug,
-    url: url,
+    slug,
+    url,
   });
-  res.status(200).json({ slug: slug, success: true });
+  res.status(200).json({ slug, success: true });
 };
 export default handler;

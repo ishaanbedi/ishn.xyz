@@ -13,15 +13,15 @@ const Footer = () => {
           </p>
           <p>
             Built with{" "}
-            <Link href="https://nextjs.org/" target={"_blank"}>
+            <Link href="https://nextjs.org/" target="_blank" rel="noreferrer">
               Next.js
             </Link>
             &nbsp;and{" "}
-            <Link href="https://xata.io/" target={"_blank"}>
+            <Link href="https://xata.io/" target="_blank" rel="noreferrer">
               Xata
             </Link>
             . Shipped with{" "}
-            <Link href="https://vercel.com/" target={"_blank"}>
+            <Link href="https://vercel.com/" target="_blank" rel="noreferrer">
               Vercel
             </Link>
           </p>

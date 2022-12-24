@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 const LoggedIn = ({ user }) => {
-  var isValidURL = (str) => {
+  const isValidURL = (str) => {
     try {
       new URL(str);
       return true;
@@ -16,18 +16,18 @@ const LoggedIn = ({ user }) => {
       return false;
     }
   };
-  var isValidSlug = (str) => {
+  const isValidSlug = (str) => {
     if (str.length > 20) {
       return false;
     }
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
       if (!allowedInSlug.includes(str[i])) {
         return false;
       }
     }
     return true;
   };
-  var urlPlaceholderExamples = [
+  const urlPlaceholderExamples = [
     {
       url: "https://amazingwebsite.com/this-is-a-great-website",
       slug: "grt_ws",
@@ -51,8 +51,8 @@ const LoggedIn = ({ user }) => {
     try {
       const res = await axios.post("/api/new-link-signed-in", {
         email: user.email,
-        url: url,
-        slug: slug,
+        url,
+        slug,
       });
       if (res.data.success) {
         document.getElementById("myModal").showModal();
@@ -93,7 +93,7 @@ const LoggedIn = ({ user }) => {
     copyButton.innerHTML = "Copied!";
     copyButton.disabled = true;
     setTimeout(() => {
-      copyButton.innerHTML = `Copy Link`;
+      copyButton.innerHTML = "Copy Link";
       copyButton.disabled = false;
     }, 2000);
   };
@@ -114,7 +114,11 @@ const LoggedIn = ({ user }) => {
               <h1>Link created successfully!</h1>
               <h4>
                 <br /> Accessible at{" "}
-                <Link target={"_blank"} href={`https://ishn.xyz/${slug}`}>
+                <Link
+                  target="_blank"
+                  href={`https://ishn.xyz/${slug}`}
+                  rel="noreferrer"
+                >
                   ishn.xyz/{slug}
                 </Link>
               </h4>
@@ -133,7 +137,7 @@ const LoggedIn = ({ user }) => {
                     display: "inline-block",
                     width: "1rem",
                   }}
-                ></span>
+                />
                 <button
                   className="copy-button"
                   onClick={() => {
