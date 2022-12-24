@@ -1,6 +1,30 @@
 import { XataClient } from "../../xata";
+import { getSession } from "next-auth/react";
 const xata = new XataClient();
 const handler = async (req, res) => {
+  if (!req.headers["user-agent"].includes("Mozilla")) {
+    res.status(400).json({
+      error:
+        "Not a browser request. To enhance security of the user data, we allow requests from only a browser.",
+    });
+    return;
+  }
+  const session = await getSession({ req });
+  if (!session) {
+    res.status(401).json({ error: "Not a signed in user." });
+    return;
+  }
+  var params = req.body;
+  if (!params.email) {
+    res.status(400).json({
+      error: "Missing email.",
+    });
+    return;
+  }
+  if (session.user.email !== params.email) {
+    res.status(401).json({ error: "Not authorized." });
+    return;
+  }
   var generateRandomSlug = function () {
     var text = "";
     var possible =
@@ -19,12 +43,10 @@ const handler = async (req, res) => {
   var data = await xata.db.global_data.getAll();
   data = data.filter((item) => item.slug === slug);
   if (data.length > 0) {
-    res
-      .status(400)
-      .json({
-        error:
-          "Slug already exists. Please try again. Leave the slug field blank to generate a random slug.",
-      });
+    res.status(400).json({
+      error:
+        "Slug already exists. Please try again. Leave the slug field blank to generate a random slug.",
+    });
     return;
   }
   if (!slug) {

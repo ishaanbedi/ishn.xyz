@@ -99,6 +99,7 @@ const Dashboard = () => {
                                   .post("/api/delete-record", {
                                     body: {
                                       slug: link.slug,
+                                      email: session.user.email,
                                     },
                                   })
                                   .then((e) => {
