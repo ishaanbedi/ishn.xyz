@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
+import { CgProfile } from "react-icons/cg";
+import { BiStats } from "react-icons/bi";
 const Nav = () => {
   const { data: session } = useSession();
   return (
@@ -15,19 +17,29 @@ const Nav = () => {
       </div>
       <div className="navbar-end">
         {session ? (
-          <Link
-            href={
-              window.location.pathname === "/dashboard"
-                ? "/profile"
-                : "/dashboard"
-            }
-          >
-            <span className="btn">
-              {window.location.pathname === "/dashboard"
-                ? "Profile"
-                : "Dashboard"}
+          <>
+            <span className="lg:md:flex hidden flex-row space-x-2">
+              <Link href="/dashboard">
+                <span className="btn">Dashboard</span>
+              </Link>
+              <Link href="/profile">
+                <span className="btn btn-ghost">Profile</span>
+              </Link>
             </span>
-          </Link>
+
+            <span className="lg:md:hidden flex flex-row space-x-1">
+              <Link href="/dashboard">
+                <span className="btn btn-ghost">
+                  <BiStats className="text-xl" />
+                </span>
+              </Link>
+              <Link href="/profile">
+                <span className="btn btn-ghost">
+                  <CgProfile className="text-xl" />
+                </span>
+              </Link>
+            </span>
+          </>
         ) : (
           <span className="btn" onClick={() => signIn()}>
             Sign In

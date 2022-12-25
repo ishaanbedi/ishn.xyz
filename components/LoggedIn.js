@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Footer from "../components/Footer";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading, AiOutlineLink } from "react-icons/ai";
 import { FaCopy } from "react-icons/fa";
 import { IoBarcodeOutline } from "react-icons/io5";
 import { FaDownload } from "react-icons/fa";
+import { BsFillPencilFill } from "react-icons/bs";
 import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -24,23 +25,25 @@ const LoggedIn = () => {
     setLoading(true);
     if (url === "") {
       setLoading(false);
-      document.getElementById("url-input").classList.add("border-error");
+      document.getElementById("url-input").classList.add("border-warning");
       document.querySelector(".btn-primary").innerHTML = "Please enter a URL";
+      document.querySelector(".btn-primary").classList.add("btn-warning");
       setTimeout(() => {
-        document.getElementById("url-input").classList.remove("border-error");
+        document.getElementById("url-input").classList.remove("border-warning");
         document.querySelector(".btn-primary").innerHTML = "Shorten";
+        document.querySelector(".btn-primary").classList.remove("btn-warning");
       }, 2000);
       return;
     }
     if (!isValidURL(url)) {
       var button = document.querySelector(".btn-primary");
-      button.disabled = true;
       button.innerHTML = "Please enter a valid URL";
-      document.getElementById("url-input").classList.add("border-error");
+      document.getElementById("url-input").classList.add("border-warning");
+      button.classList.add("btn-warning");
       setTimeout(() => {
-        button.disabled = false;
         button.innerHTML = "Shorten";
-        document.getElementById("url-input").classList.remove("border-error");
+        document.getElementById("url-input").classList.remove("border-warning");
+        button.classList.remove("btn-warning");
       }, 2000);
       setLoading(false);
       return;
@@ -50,15 +53,15 @@ const LoggedIn = () => {
       for (var i = 0; i < slug.length; i++) {
         if (!allowedChars.includes(slug[i])) {
           var button = document.querySelector(".btn-primary");
-          button.disabled = true;
           button.innerHTML = "Invalid characters in slug";
-          document.getElementById("slug-input").classList.add("border-error");
+          document.getElementById("slug-input").classList.add("border-warning");
+          button.classList.add("btn-warning");
           setTimeout(() => {
-            button.disabled = false;
             button.innerHTML = "Shorten";
+            button.classList.remove("btn-warning");
             document
               .getElementById("slug-input")
-              .classList.remove("border-error");
+              .classList.remove("border-warning");
           }, 2000);
           setLoading(false);
           return;
@@ -66,30 +69,30 @@ const LoggedIn = () => {
       }
       if (slug.length < 4) {
         var button = document.querySelector(".btn-primary");
-        button.disabled = true;
         button.innerHTML = "Slug must be at least 4 characters";
-        document.getElementById("slug-input").classList.add("border-error");
+        document.getElementById("slug-input").classList.add("border-warning");
+        button.classList.add("btn-warning");
         setTimeout(() => {
-          button.disabled = false;
           button.innerHTML = "Shorten";
           document
             .getElementById("slug-input")
-            .classList.remove("border-error");
+            .classList.remove("border-warning");
+          button.classList.remove("btn-warning");
         }, 2000);
         setLoading(false);
         return;
       }
       if (slug.length > 20) {
         var button = document.querySelector(".btn-primary");
-        button.disabled = true;
         button.innerHTML = "Slug must be at most 20 characters";
-        document.getElementById("slug-input").classList.add("border-error");
+        document.getElementById("slug-input").classList.add("border-warning");
+        button.classList.add("btn-warning");
         setTimeout(() => {
-          button.disabled = false;
           button.innerHTML = "Shorten";
+          button.classList.remove("btn-warning");
           document
             .getElementById("slug-input")
-            .classList.remove("border-error");
+            .classList.remove("border-warning");
         }, 2000);
         setLoading(false);
         return;
@@ -136,41 +139,29 @@ const LoggedIn = () => {
         </Head>
         <main>
           <Nav />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hero lg:mt-32 md:mt-24 sm:mt-16 mt-12">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-              <div className="text-center lg:text-left lg:md:pl-12">
-                <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold">
-                  <span>ishn.xyz</span>
-                </h1>
-                <p className="pt-6 lg:text-xl md:text-lg sm:text-base text-sm">
-                  Generate, customize, track, and share your links. Blazing fast
-                </p>
-                <p className="pt-6 lg:text-xl md:text-lg sm:text-base text-sm">
-                  View the links you&apos;ve created and their stats in your{" "}
-                  <Link
-                    className="underline underline-offset-2 font-bold"
-                    href="/dashboard"
-                  >
-                    dashboard
-                  </Link>
-                  .
-                </p>
-              </div>
-              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <div className="card-body">
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text text-md font-bold">
-                        Enter the URL you want to shorten
-                      </span>
-                    </label>
+          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-lg">
+              <h1 className="text-center text-2xl font-bold sm:text-3xl">
+                ishn.xyz | Link Shortener
+              </h1>
+
+              <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+                Generate, customize, track, and share your links. Blazing fast
+              </p>
+              <form
+                action=""
+                className="mt-6 mb-0 space-y-4 rounded-lg p-8 shadow-2xl"
+              >
+                <div>
+                  <p className="text-sm font-medium">
+                    Enter the URL you want to shorten
+                  </p>
+                  <div className="relative mt-1">
                     <input
                       autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="off"
                       spellCheck="false"
                       id="url-input"
-                      placeholder="https://website.com/very-long-url.html"
+                      placeholder="Your URL goes here"
                       onKeyPress={(e) => {
                         if (e.key === " ") {
                           e.preventDefault();
@@ -184,25 +175,23 @@ const LoggedIn = () => {
                       type="text"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
-                      className="input input-bordered"
+                      className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
+                    <span className="absolute inset-y-0 right-4 inline-flex items-center">
+                      <AiOutlineLink className="text-gray-400" />
+                    </span>
                   </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text text-md font-bold">
-                        Your preferred slug (leave blank for random)
-                      </span>
-                    </label>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">Your preferred slug</p>
+                  <div className="relative mt-1">
                     <input
                       autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="off"
                       spellCheck="false"
                       id="slug-input"
-                      placeholder="myslug"
+                      placeholder="Leave blank for a random one"
                       onKeyPress={(e) => {
-                        var allowedChars = /^[a-zA-Z0-9]+$/;
-                        if (!allowedChars.test(e.key)) {
+                        if (e.key === " ") {
                           e.preventDefault();
                         }
                       }}
@@ -214,30 +203,53 @@ const LoggedIn = () => {
                       type="text"
                       value={slug}
                       onChange={(e) => {
+                        var allowedChars = /^[a-zA-Z0-9]+$/;
+                        if (e.target.value.match(allowedChars)) {
+                          setSlug(e.target.value);
+                        }
+                      }}
+                      onBlur={(e) => {
+                        var allowedChars = /^[a-zA-Z0-9]+$/;
+                        if (!e.target.value.match(allowedChars)) {
+                          setSlug("");
+                        }
                         setSlug(e.target.value);
                       }}
-                      className="input input-bordered"
+                      className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
-                  </div>
-                  <div className="form-control mt-6">
-                    <button
-                      disabled={loading}
-                      onClick={createInDB}
-                      className="btn btn-primary"
-                    >
-                      {loading ? (
-                        <>
-                          <AiOutlineLoading className="animate-spin" />
-                        </>
-                      ) : (
-                        "Shorten"
-                      )}
-                    </button>
+                    <span className="absolute inset-y-0 right-4 inline-flex items-center">
+                      <BsFillPencilFill className="text-gray-400" />
+                    </span>
                   </div>
                 </div>
-              </div>
+                <button
+                  disabled={loading}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    createInDB();
+                  }}
+                  type="submit"
+                  className="btn btn-primary w-full rounded-lg px-5 py-3 flex justify-center text-sm font-medium"
+                >
+                  {loading ? (
+                    <>
+                      <AiOutlineLoading className="animate-spin" />
+                    </>
+                  ) : (
+                    "Shorten"
+                  )}
+                </button>
+                <p className="pt-3 text-center text-sm">
+                  <Link href="/dashboard">
+                    <span className="font-bold cursor-pointer">
+                      View the links you&apos;ve created and their stats in your
+                      dashboard.
+                    </span>
+                  </Link>
+                </p>
+              </form>
             </div>
-          </div>
+          </div>{" "}
           <Footer />
         </main>
       </section>

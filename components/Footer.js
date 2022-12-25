@@ -42,23 +42,6 @@ const Footer = () => {
             </Link>
             .
           </p>
-          <p>
-            <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
-              href="/policies/privacy-policy.html"
-              target={"_blank"}
-            >
-              Privacy Policy
-            </Link>
-            &nbsp;|&nbsp;
-            <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
-              href="/policies/tnc.html"
-              target={"_blank"}
-            >
-              Terms of Service
-            </Link>
-          </p>
         </center>
       </footer>
     </div>

@@ -8,13 +8,14 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { FaCopy } from "react-icons/fa";
 import { IoBarcodeOutline } from "react-icons/io5";
 import { FaDownload } from "react-icons/fa";
+import { AiOutlineLink } from "react-icons/ai";
 import React from "react";
-
 import Link from "next/link";
 const NotLoggedIn = () => {
   var isValidURL = (str) => {
     try {
       new URL(str);
+      
       return true;
     } catch (e) {
       return false;
@@ -24,25 +25,26 @@ const NotLoggedIn = () => {
     setLoading(true);
     if (url === "") {
       setLoading(false);
-      document.querySelector(".input").classList.add("border-error");
-      document.querySelector(".btn-primary").disabled = true;
+      document.querySelector(".input").classList.add("border-warning");
       document.querySelector(".btn-primary").innerHTML = "Please enter a URL";
+      document.querySelector(".btn-primary").classList.add("btn-warning");
       setTimeout(() => {
-        document.querySelector(".input").classList.remove("border-error");
+        document.querySelector(".input").classList.remove("border-warning");
         document.querySelector(".btn-primary").innerHTML = "Shorten";
-        document.querySelector(".btn-primary").disabled = false;
+        document.querySelector(".btn-primary").classList.remove("btn-warning");
       }, 2000);
       return;
     }
     if (!isValidURL(url)) {
       var button = document.querySelector(".btn-primary");
-      button.disabled = true;
       button.innerHTML = "Please enter a valid URL";
-      document.querySelector(".input").classList.add("border-error");
+      document.querySelector(".input").classList.add("border-warning");
+      button.classList.add("btn-warning");
       setTimeout(() => {
         button.disabled = false;
         button.innerHTML = "Shorten";
-        document.querySelector(".input").classList.remove("border-error");
+        document.querySelector(".input").classList.remove("border-warning");
+        button.classList.remove("btn-warning");
       }, 2000);
       setLoading(false);
       return;
@@ -87,51 +89,25 @@ const NotLoggedIn = () => {
         </Head>
         <main>
           <Nav />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hero lg:mt-32 md:mt-24 sm:mt-16 mt-12">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-              <div className="text-center lg:text-left lg:md:pl-12">
-                <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold">
-                  <span>ishn.xyz</span> | Link Shortener
-                </h1>
-                <p className="pt-6 lg:text-xl md:text-lg sm:text-base text-sm">
-                  Generate, customize, track, and share your links. Blazing fast
+
+          <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-lg">
+              <h1 className="text-center text-2xl font-bold sm:text-3xl">
+                ishn.xyz | Link Shortener
+              </h1>
+
+              <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+                Generate, customize, track, and share your links. Blazing fast
+              </p>
+              <form
+                action=""
+                className="mt-6 mb-0 space-y-4 rounded-lg p-8 shadow-2xl"
+              >
+                <p className="text-lg font-medium">
+                  Enter the URL you want to shorten
                 </p>
-                <p className="pt-3 lg:text-xl md:text-lg sm:text-base text-sm">
-                  <span className="link font-medium" onClick={() => signIn()}>
-                    Login
-                  </span>{" "}
-                  to get more features like links with{" "}
-                  <span
-                    className="tooltip tooltip-bottom underline underline-offset-4"
-                    data-tip="ishn.xyz/github"
-                  >
-                    custom slugs
-                  </span>
-                  , dashboard with{" "}
-                  <span
-                    className="tooltip tooltip-bottom underline underline-offset-4"
-                    data-tip="Number of clicks, countries etc."
-                  >
-                    analytics
-                  </span>
-                  , and more, for{" "}
-                  <span
-                    className="tooltip tooltip-bottom underline underline-offset-4"
-                    data-tip="Yes, it's completely free!"
-                  >
-                    free
-                  </span>
-                  !
-                </p>
-              </div>
-              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <div className="card-body">
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text text-md font-bold">
-                        Enter the URL you want to shorten
-                      </span>
-                    </label>
+                <div>
+                  <div className="relative mt-1">
                     <input
                       placeholder="https://website.com/very-long-url.html"
                       onKeyPress={(e) => {
@@ -147,28 +123,43 @@ const NotLoggedIn = () => {
                       type="text"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
-                      className="input input-bordered"
+                      className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
-                  </div>
-                  <div className="form-control mt-6">
-                    <button
-                      disabled={loading}
-                      onClick={createInDB}
-                      className="btn btn-primary"
-                    >
-                      {loading ? (
-                        <>
-                          <AiOutlineLoading className="animate-spin" />
-                        </>
-                      ) : (
-                        "Shorten"
-                      )}
-                    </button>
+                    <span className="absolute inset-y-0 right-4 inline-flex items-center">
+                      <AiOutlineLink className="text-gray-400" />
+                    </span>
                   </div>
                 </div>
-              </div>
+                <button
+                  disabled={loading}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    createInDB();
+                  }}
+                  type="submit"
+                  className="btn btn-primary w-full rounded-lg px-5 py-3 flex justify-center text-sm font-medium"
+                >
+                  {loading ? (
+                    <>
+                      <AiOutlineLoading className="animate-spin" />
+                    </>
+                  ) : (
+                    "Shorten"
+                  )}
+                </button>
+                <p className="pt-3 text-center text-sm">
+                  <span
+                    className="tooltip tooltip-bottom font-bold cursor-pointer"
+                    onClick={() => signIn()}
+                    data-tip="Create links with custom slugs, track clicks in your dashboard, and more!"
+                  >
+                    Login to get more features!
+                  </span>
+                </p>
+              </form>
             </div>
           </div>
+
           <Footer />
         </main>
       </section>
