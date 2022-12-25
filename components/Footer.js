@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="hidden md:block">
       <footer className="py-3 absolute bottom-2 w-screen">
         <center>
           <p>
