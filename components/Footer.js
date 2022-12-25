@@ -10,7 +10,8 @@ const Footer = () => {
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/ishn"
-              target={"_blank"}
+              target="_blank"
+              rel="noreferrer"
             >
               Ishaan Bedi
             </Link>
@@ -20,7 +21,8 @@ const Footer = () => {
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/nextjs"
-              target={"_blank"}
+              target="_blank"
+              rel="noreferrer"
             >
               Next.js
             </Link>
@@ -28,7 +30,8 @@ const Footer = () => {
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/xata"
-              target={"_blank"}
+              target="_blank"
+              rel="noreferrer"
             >
               Xata
             </Link>
@@ -36,7 +39,8 @@ const Footer = () => {
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/vercel"
-              target={"_blank"}
+              target="_blank"
+              rel="noreferrer"
             >
               Vercel
             </Link>
