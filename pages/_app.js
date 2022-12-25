@@ -7,7 +7,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <React.Fragment>
+    <>
       <SessionProvider session={session}>
         <Component {...pageProps} />
         <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
@@ -20,6 +20,6 @@ export default function App({
           />
         </noscript>
       </SessionProvider>
-    </React.Fragment>
+    </>
   );
 }

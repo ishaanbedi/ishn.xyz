@@ -12,7 +12,7 @@ const Profile = () => {
       <header>
         <main>
           <h1>You are not signed in</h1>
-          <Link href={"/"}>Home</Link>{" "}
+          <Link href="/">Home</Link>{" "}
         </main>
       </header>
     );

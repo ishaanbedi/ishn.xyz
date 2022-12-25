@@ -18,7 +18,7 @@ const handler = async (req, res) => {
     return;
   }
   const records = await xata.db.global_data.getAll();
-  var filteredRecords = records.filter((r) => r.email === params.email);
+  let filteredRecords = records.filter((r) => r.email === params.email);
   filteredRecords = filteredRecords.reverse();
   res.status(200).json(filteredRecords);
 };
