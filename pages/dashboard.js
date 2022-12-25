@@ -65,9 +65,6 @@ const Dashboard = () => {
         <h1 className="text-3xl text-center py-2 font-bold tracking-tight  sm:text-4xl">
           Dashboard
         </h1>
-        <p className="py-2 text-center lg:md:sm:hidden text-sm text-gray-500">
-          (Drag across the table to see more)
-        </p>
 
         {loading ? (
           <p className="text-2xl flex flex-row space-x-3 justify-center items-center">
@@ -79,6 +76,10 @@ const Dashboard = () => {
             {userLinks && userLinks.length > 0 ? (
               <>
                 <div className="overflow-x-auto">
+                  <p className="py-2 text-center lg:md:sm:hidden text-sm text-gray-500">
+                    (Drag across the table to see more)
+                  </p>
+
                   <table className=" px-3 table table-zebra w-full">
                     <thead>
                       <tr className="text-center">
