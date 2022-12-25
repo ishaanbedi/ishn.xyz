@@ -11,7 +11,7 @@ import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 const LoggedIn = () => {
-  var { data: session, status } = useSession();
+  var { data: session } = useSession();
   var isValidURL = (str) => {
     try {
       new URL(str);
@@ -19,17 +19,6 @@ const LoggedIn = () => {
     } catch (e) {
       return false;
     }
-  };
-  var isValidSlug = (str) => {
-    if (str.length > 20) {
-      return false;
-    }
-    if (str.length < 3) return false;
-    var allowed = "abcdefghijklmnopqrstuvwxyz0123456789_-";
-    for (var i = 0; i < str.length; i++) {
-      if (!allowed.includes(str[i])) return false;
-    }
-    return true;
   };
   const createInDB = async () => {
     setLoading(true);
@@ -51,70 +40,94 @@ const LoggedIn = () => {
       setTimeout(() => {
         button.disabled = false;
         button.innerHTML = "Shorten";
-        document.getElementById("url-input").value = "";
-        setUrl("");
         document.getElementById("url-input").classList.remove("border-error");
       }, 2000);
       setLoading(false);
       return;
     }
-    if (slug !== "" && !isValidSlug(slug)) {
-      var button = document.querySelector(".btn-primary");
-      button.disabled = true;
+    if (slug !== "") {
+      var allowedChars = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_`;
+      for (var i = 0; i < slug.length; i++) {
+        if (!allowedChars.includes(slug[i])) {
+          var button = document.querySelector(".btn-primary");
+          button.disabled = true;
+          button.innerHTML = "Invalid characters in slug";
+          document.getElementById("slug-input").classList.add("border-error");
+          setTimeout(() => {
+            button.disabled = false;
+            button.innerHTML = "Shorten";
+            document
+              .getElementById("slug-input")
+              .classList.remove("border-error");
+          }, 2000);
+          setLoading(false);
+          return;
+        }
+      }
+      if (slug.length < 4) {
+        var button = document.querySelector(".btn-primary");
+        button.disabled = true;
+        button.innerHTML = "Slug must be at least 4 characters";
+        document.getElementById("slug-input").classList.add("border-error");
+        setTimeout(() => {
+          button.disabled = false;
+          button.innerHTML = "Shorten";
+          document
+            .getElementById("slug-input")
+            .classList.remove("border-error");
+        }, 2000);
+        setLoading(false);
+        return;
+      }
       if (slug.length > 20) {
-        button.innerHTML = "Slug must be less than 20 characters";
+        var button = document.querySelector(".btn-primary");
+        button.disabled = true;
+        button.innerHTML = "Slug must be at most 20 characters";
+        document.getElementById("slug-input").classList.add("border-error");
+        setTimeout(() => {
+          button.disabled = false;
+          button.innerHTML = "Shorten";
+          document
+            .getElementById("slug-input")
+            .classList.remove("border-error");
+        }, 2000);
+        setLoading(false);
+        return;
       }
-      if (slug.length < 3) {
-        button.innerHTML = "Slug must be more than 3 characters";
-      }
-      if (slug.length >= 3 && slug.length <= 20) {
-        button.innerHTML = "Invalid characters in slug.";
-      }
-      document.getElementById("slug-input").classList.add("border-error");
-      setTimeout(() => {
-        button.disabled = false;
-        button.innerHTML = "Shorten";
-        document.getElementById("slug-input").classList.remove("border-error");
-        document.getElementById("slug-input").value = "";
-        setSlug("");
-      }, 2000);
-      setLoading(false);
-      return;
     }
-    const res = await axios.post("/api/new-link-signed-in", {
-      url: url,
-      slug: slug,
-      email: session.user.email,
-    });
-    if (res.data.success) {
-      var label = document.createElement("label");
-      label.htmlFor = "my-modal-6";
-      document.body.appendChild(label);
-      label.classList.add("hidden");
-      label.click();
-      document.body.removeChild(label);
-      document.getElementById("url-input").value = "";
-      document.getElementById("slug-input").value = "";
-      setSlug(res.data.slug);
+    try {
+      const res = await axios.post("/api/new-link-signed-in", {
+        url: url,
+        slug: slug,
+        email: session.user.email,
+      });
+      if (res.data.success) {
+        var label = document.createElement("label");
+        label.htmlFor = "my-modal-6";
+        document.body.appendChild(label);
+        label.classList.add("hidden");
+        label.click();
+        document.body.removeChild(label);
+        document.getElementById("url-input").value = "";
+        setSlug(res.data.slug);
+      }
+    } catch (e) {
+      if (e.response.data.internalCode) {
+        var label = document.createElement("label");
+        label.htmlFor = "my-modal-7";
+        document.body.appendChild(label);
+        label.classList.add("hidden");
+        label.click();
+        document.body.removeChild(label);
+      }
     }
+
     setLoading(false);
   };
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState("");
-  const handleKeyPress = (e) => {
-    var button = document.querySelector(".btn-primary");
-    if (button.disabled) return;
-    if (e.key === "Enter" && url !== "") {
-      createInDB();
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("keypress", handleKeyPress);
-    return () => {
-      document.removeEventListener("keypress", handleKeyPress);
-    };
-  }, [url]);
+
   return (
     <>
       <section>
@@ -200,7 +213,9 @@ const LoggedIn = () => {
                       }}
                       type="text"
                       value={slug}
-                      onChange={(e) => setSlug(e.target.value)}
+                      onChange={(e) => {
+                        setSlug(e.target.value);
+                      }}
                       className="input input-bordered"
                     />
                   </div>
@@ -303,12 +318,29 @@ const LoggedIn = () => {
           <div className="modal-action">
             <label
               onClick={() => {
+                var qrCodeContainer =
+                  document.querySelector(".qr-code-container");
+                qrCodeContainer.classList.add("hidden");
                 setUrl("");
                 setSlug("");
               }}
               htmlFor="my-modal-6"
               className="btn"
             >
+              Close
+            </label>
+          </div>
+        </div>
+      </div>
+      <input type="checkbox" id="my-modal-7" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Oops!</h3>
+          <p className="py-4">
+            That slug is already taken, please try another one.
+          </p>
+          <div className="modal-action">
+            <label htmlFor="my-modal-7" className="btn">
               Close
             </label>
           </div>

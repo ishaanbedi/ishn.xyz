@@ -9,7 +9,7 @@ const Footer = () => {
             With ❤️ by{" "}
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
-              href="https://www.ishaanbedi.in/"
+              href="https://www.ishn.xyz/ishn"
               target={"_blank"}
             >
               Ishaan Bedi
@@ -19,7 +19,7 @@ const Footer = () => {
             Built with{" "}
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
-              href="https://nextjs.org/"
+              href="https://www.ishn.xyz/nextjs"
               target={"_blank"}
             >
               Next.js
@@ -27,7 +27,7 @@ const Footer = () => {
             &nbsp;and{" "}
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
-              href="https://xata.io/"
+              href="https://www.ishn.xyz/xata"
               target={"_blank"}
             >
               Xata
@@ -35,7 +35,7 @@ const Footer = () => {
             . Shipped with{" "}
             <Link
               className="text-secondary font-bold hover:underline underline-offset-2"
-              href="https://vercel.com/"
+              href="https://www.ishn.xyz/vercel"
               target={"_blank"}
             >
               Vercel

@@ -1,3 +1,4 @@
+import React from "react";
 import { getXataClient } from "../xata";
 const Shorter = () => {
   return (

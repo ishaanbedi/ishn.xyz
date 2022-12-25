@@ -1,27 +1,20 @@
-import Head from "next/head";
 import Link from "next/link";
 const Custom404 = () => {
   return (
-    <header>
-      <main>
-        <Head>
-          <title>404 - Page Not Found</title>
-        </Head>
-        <h1>404 - Page Not Found</h1>
-        <h4>The page you are looking for does not exist.</h4>
-        <p>
-          Maybe that slug is available. Try creating a new link{" "}
-          <Link
-            href={{
-              pathname: "/",
-            }}
-          >
-            here
+    <div className="grid h-screen px-4 place-content-center">
+      <div className="text-center">
+        <h1 className="font-black text-9xl">404</h1>
+
+        <p className="text-2xl font-bold tracking-tight  sm:text-4xl">Uh-oh!</p>
+
+        <p className="mt-4 ">We can&apos;t find that page.</p>
+        <div className="my-3">
+          <Link href="/">
+            <button className="btn btn-ghost">Go Back Home</button>
           </Link>
-          .
-        </p>
-      </main>
-    </header>
+        </div>
+      </div>
+    </div>
   );
 };
 

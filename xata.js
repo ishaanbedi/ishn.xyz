@@ -71,6 +71,8 @@ const tables = [
       },
       { name: "email", type: "email" },
       { name: "views", type: "int", notNull: true, defaultValue: "0" },
+      { name: "countries", type: "text", notNull: true, defaultValue: "[]" },
+      { name: "browsers", type: "text", notNull: true, defaultValue: "[]" },
     ],
   },
 ];

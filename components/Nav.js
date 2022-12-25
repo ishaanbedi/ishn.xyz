@@ -2,7 +2,6 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 const Nav = () => {
   const { data: session } = useSession();
-
   return (
     <div className="navbar pt-6 lg:md:px-24">
       <div className="navbar-start">
@@ -16,8 +15,18 @@ const Nav = () => {
       </div>
       <div className="navbar-end">
         {session ? (
-          <Link href="/dashboard">
-            <span className="btn">Dashboard</span>
+          <Link
+            href={
+              window.location.pathname === "/dashboard"
+                ? "/profile"
+                : "/dashboard"
+            }
+          >
+            <span className="btn">
+              {window.location.pathname === "/dashboard"
+                ? "Profile"
+                : "Dashboard"}
+            </span>
           </Link>
         ) : (
           <span className="btn" onClick={() => signIn()}>

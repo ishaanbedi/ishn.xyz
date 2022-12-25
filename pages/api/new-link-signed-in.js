@@ -46,6 +46,7 @@ const handler = async (req, res) => {
     res.status(400).json({
       error:
         "Slug already exists. Please try again. Leave the slug field blank to generate a random slug.",
+        internalCode: "slug-exists"
     });
     return;
   }

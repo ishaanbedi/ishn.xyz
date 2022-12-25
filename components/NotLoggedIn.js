@@ -247,7 +247,16 @@ const NotLoggedIn = () => {
             </button>
           </div>
           <div className="modal-action">
-            <label htmlFor="my-modal-6" className="btn">
+            <label
+              onClick={() => {
+                var qrCodeContainer =
+                  document.querySelector(".qr-code-container");
+                qrCodeContainer.classList.add("hidden");
+                setUrl("");
+              }}
+              htmlFor="my-modal-6"
+              className="btn"
+            >
               Close
             </label>
           </div>
