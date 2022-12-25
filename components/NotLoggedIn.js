@@ -89,7 +89,7 @@ const NotLoggedIn = () => {
           <Nav />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hero lg:mt-32 md:mt-24 sm:mt-16 mt-12">
             <div className="hero-content flex-col lg:flex-row-reverse">
-              <div className="text-center lg:text-left lg:md:pl-12">
+              <div className="text-center lg:text-left ">
                 <h1 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl font-bold">
                   <span>ishn.xyz</span> | Link Shortener
                 </h1>
