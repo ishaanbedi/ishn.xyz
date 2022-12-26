@@ -3,7 +3,7 @@ import NotLoggedIn from "../components/NotLoggedIn";
 import LoggedIn from "../components/LoggedIn";
 import Head from "next/head";
 const Home = () => {
-  var { data: session } = useSession();
+  const { data: session } = useSession();
   session === undefined && (
     <header>
       <main>
