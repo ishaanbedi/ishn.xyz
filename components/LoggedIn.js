@@ -1,19 +1,17 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Footer from "../components/Footer";
 import { AiOutlineLoading, AiOutlineLink } from "react-icons/ai";
-import { FaCopy } from "react-icons/fa";
+import { FaCopy, FaDownload } from "react-icons/fa";
 import { IoBarcodeOutline } from "react-icons/io5";
-import { FaDownload } from "react-icons/fa";
 import { BsFillPencilFill } from "react-icons/bs";
-import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 const LoggedIn = () => {
-  var { data: session } = useSession();
-  var isValidURL = (str) => {
+  const { data: session } = useSession();
+  const isValidURL = (str) => {
     try {
       new URL(str);
       return true;
@@ -49,8 +47,9 @@ const LoggedIn = () => {
       return;
     }
     if (slug !== "") {
-      var allowedChars = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_`;
-      for (var i = 0; i < slug.length; i++) {
+      const allowedChars =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+      for (let i = 0; i < slug.length; i++) {
         if (!allowedChars.includes(slug[i])) {
           var button = document.querySelector(".btn-primary");
           button.innerHTML = "Invalid characters in slug";
@@ -100,8 +99,8 @@ const LoggedIn = () => {
     }
     try {
       const res = await axios.post("/api/new-link-signed-in", {
-        url: url,
-        slug: slug,
+        url,
+        slug,
         email: session.user.email,
       });
       if (res.data.success) {
@@ -203,13 +202,13 @@ const LoggedIn = () => {
                       type="text"
                       value={slug}
                       onChange={(e) => {
-                        var allowedChars = /^[a-zA-Z0-9]+$/;
+                        const allowedChars = /^[a-zA-Z0-9]+$/;
                         if (e.target.value.match(allowedChars)) {
                           setSlug(e.target.value);
                         }
                       }}
                       onBlur={(e) => {
-                        var allowedChars = /^[a-zA-Z0-9]+$/;
+                        const allowedChars = /^[a-zA-Z0-9]+$/;
                         if (!e.target.value.match(allowedChars)) {
                           setSlug("");
                         }
@@ -261,7 +260,11 @@ const LoggedIn = () => {
           </h3>
           <p className="py-4">
             Your link is accessible at{" "}
-            <Link target={"_blank"} href={`https://www.ishn.xyz/${slug}`}>
+            <Link
+              target="_blank"
+              href={`https://www.ishn.xyz/${slug}`}
+              rel="noreferrer"
+            >
               <span className="link font-medium">ishn.xyz/{slug}</span>
             </Link>
           </p>
@@ -269,7 +272,7 @@ const LoggedIn = () => {
             <button
               onClick={() => {
                 navigator.clipboard.writeText(`https://www.ishn.xyz/${slug}`);
-                var copyText = document.querySelector(".copy-button-text");
+                const copyText = document.querySelector(".copy-button-text");
                 copyText.innerHTML = "Copied!";
                 setTimeout(() => {
                   copyText.innerHTML = "Copy";
@@ -285,7 +288,7 @@ const LoggedIn = () => {
               <span
                 className="ml-2 copy-button-text"
                 onClick={() => {
-                  var qrCodeContainer =
+                  const qrCodeContainer =
                     document.querySelector(".qr-code-container");
                   qrCodeContainer.classList.remove("hidden");
                 }}
@@ -309,13 +312,13 @@ const LoggedIn = () => {
             <button
               className="flex flex-row items-center copy-button ml-4"
               onClick={() => {
-                var qrCode = document.querySelector(".qr-code-container img");
-                var canvas = document.createElement("canvas");
+                const qrCode = document.querySelector(".qr-code-container img");
+                const canvas = document.createElement("canvas");
                 canvas.width = qrCode.width;
                 canvas.height = qrCode.height;
-                var ctx = canvas.getContext("2d");
+                const ctx = canvas.getContext("2d");
                 ctx.drawImage(qrCode, 0, 0);
-                var a = document.createElement("a");
+                const a = document.createElement("a");
                 a.href = canvas.toDataURL("image/png");
                 a.download = `ishn_xyz_${slug}.png`;
                 a.click();
@@ -330,7 +333,7 @@ const LoggedIn = () => {
           <div className="modal-action">
             <label
               onClick={() => {
-                var qrCodeContainer =
+                const qrCodeContainer =
                   document.querySelector(".qr-code-container");
                 qrCodeContainer.classList.add("hidden");
                 setUrl("");
