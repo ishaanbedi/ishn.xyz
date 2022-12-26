@@ -182,13 +182,13 @@ const NotLoggedIn = () => {
                 var copyText = document.querySelector(".copy-button-text");
                 copyText.innerHTML = "Copied!";
                 setTimeout(() => {
-                  copyText.innerHTML = "Copy to clipboard";
+                  copyText.innerHTML = "Copy";
                 }, 2000);
               }}
               className="flex flex-row items-center copy-button"
             >
               <FaCopy className="text-2xl" />
-              <span className="ml-2 copy-button-text">Copy to clipboard</span>
+              <span className="ml-2 copy-button-text">Copy</span>
             </button>
             <button className="flex flex-row items-center copy-button">
               <IoBarcodeOutline className="text-2xl" />

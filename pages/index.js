@@ -5,7 +5,7 @@ import Head from "next/head";
 const Home = () => {
   const { data: session } = useSession();
   while (session === undefined) {
-    return (
+    return ( 
       <header>
         <main>
           <Head>
