@@ -7,7 +7,7 @@ const Create = () => {
 };
 
 export default Create;
-export const getServerSideProps = async () => {
+export const getServerSideProps = () => {
   return {
     redirect: {
       destination: "/",
