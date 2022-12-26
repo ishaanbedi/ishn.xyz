@@ -117,13 +117,12 @@ const LoggedIn = () => {
         setSlug(res.data.slug);
       }
     } catch (e) {
-      if (e.response.data.internalCode) {
-        label.htmlFor = "my-modal-7";
-        document.body.appendChild(label);
-        label.classList.add("hidden");
-        label.click();
-        document.body.removeChild(label);
-      }
+      var label = document.createElement("label");
+      label.htmlFor = "my-modal-7";
+      document.body.appendChild(label);
+      label.classList.add("hidden");
+      label.click();
+      document.body.removeChild(label);
     }
 
     setLoading(false);
@@ -347,7 +346,9 @@ const LoggedIn = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg">Oops!</h3>
           <p className="py-4">
-            That slug is already taken, please try another one.
+            That slug is already taken.
+            <br />
+            Please try another one.
           </p>
           <div className="modal-action">
             <label htmlFor="my-modal-7" className="btn">
