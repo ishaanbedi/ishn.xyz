@@ -2,8 +2,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
-import { AiFillEye as Eye } from "react-icons/ai";
-import { AiOutlineLoading as Loading } from "react-icons/ai";
+import { AiOutlineLoading as Loading, AiFillEye as Eye } from "react-icons/ai";
 import Link from "next/link";
 import Head from "next/head";
 const Dashboard = () => {

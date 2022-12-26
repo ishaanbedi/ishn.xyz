@@ -1,14 +1,12 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Footer from "../components/Footer";
 import { AiOutlineLoading, AiOutlineLink } from "react-icons/ai";
-import { FaCopy } from "react-icons/fa";
+import { FaCopy, FaDownload } from "react-icons/fa";
 import { IoBarcodeOutline } from "react-icons/io5";
-import { FaDownload } from "react-icons/fa";
 import { BsFillPencilFill } from "react-icons/bs";
-import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 const LoggedIn = () => {

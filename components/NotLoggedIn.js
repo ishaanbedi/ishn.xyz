@@ -1,15 +1,12 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import { signIn } from "next-auth/react";
 import Footer from "../components/Footer";
-import { AiOutlineLoading } from "react-icons/ai";
-import { FaCopy } from "react-icons/fa";
+import { AiOutlineLoading, AiOutlineLink } from "react-icons/ai";
 import { IoBarcodeOutline } from "react-icons/io5";
-import { FaDownload } from "react-icons/fa";
-import { AiOutlineLink } from "react-icons/ai";
-import React from "react";
+import { FaDownload, FaCopy } from "react-icons/fa";
 import Link from "next/link";
 const NotLoggedIn = () => {
   const [url, setUrl] = useState("");
