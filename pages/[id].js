@@ -12,8 +12,8 @@ const Shorter = () => {
 export default Shorter;
 export const getServerSideProps = async (context) => {
   const xata = getXataClient();
-  var data = await xata.db.global_data.getAll();
-  var temp = data.filter((item) => item.slug === context.params.id);
+  const data = await xata.db.global_data.getAll();
+  const temp = data.filter((item) => item.slug === context.params.id);
   if (temp.length === 0) {
     return {
       redirect: {
@@ -22,16 +22,16 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
-  var url = temp[0].url;
+  let url = temp[0].url;
   if (!/^https?:\/\//i.test(url)) {
     url = "http://" + url;
   }
-  var record = data.filter((item) => item.slug === context.params.id);
-  var id = record[0].id;
-  var views = record[0].views;
+  let record = data.filter((item) => item.slug === context.params.id);
+  const id = record[0].id;
+  let views = record[0].views;
   views = views + 1;
   record = await xata.db.global_data.update(id, {
-    views: views,
+    views,
   });
   return {
     redirect: {
