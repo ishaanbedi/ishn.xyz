@@ -3,8 +3,8 @@ import NotLoggedIn from "../components/NotLoggedIn";
 import LoggedIn from "../components/LoggedIn";
 import Head from "next/head";
 const Home = () => {
-  var { data: session } = useSession();
-  
+  const { data: session } = useSession();
+
   if (session !== null && session !== undefined) {
     return <LoggedIn user={session.user} />;
   }
