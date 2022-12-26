@@ -203,13 +203,14 @@ const LoggedIn = () => {
                       value={slug}
                       onChange={(e) => {
                         var allowedChars = /^[a-zA-Z0-9]+$/;
-                        if (e.target.value.match(allowedChars)) {
-                          setSlug(e.target.value);
+                        if (!allowedChars.test(e.target.value)) {
+                          setSlug("");
                         }
+                        setSlug(e.target.value);
                       }}
                       onBlur={(e) => {
                         var allowedChars = /^[a-zA-Z0-9]+$/;
-                        if (!e.target.value.match(allowedChars)) {
+                        if (!allowedChars.test(e.target.value)) {
                           setSlug("");
                         }
                         setSlug(e.target.value);
