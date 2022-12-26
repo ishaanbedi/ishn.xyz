@@ -46,13 +46,13 @@ const handler = async (req, res) => {
     res.status(400).json({
       error:
         "Slug already exists. Please try again. Leave the slug field blank to generate a random slug.",
-        internalCode: "slug-exists"
+      internalCode: "slug-exists",
     });
     return;
   }
   if (!slug) {
     var randomSlug = generateRandomSlug();
-    var data = await xata.db.global_data.getAll();
+    data = await xata.db.global_data.getAll();
     data = data.filter((item) => item.slug === randomSlug);
     if (data.length > 0) {
       randomSlug = generateRandomSlug();

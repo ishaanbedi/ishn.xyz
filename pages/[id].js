@@ -30,7 +30,7 @@ export const getServerSideProps = async (context) => {
   var id = record[0].id;
   var views = record[0].views;
   views = views + 1;
-  var record = await xata.db.global_data.update(id, {
+  record = await xata.db.global_data.update(id, {
     views: views,
   });
   return {

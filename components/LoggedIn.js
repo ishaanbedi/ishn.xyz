@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Footer from "../components/Footer";
@@ -104,8 +104,8 @@ const LoggedIn = () => {
         slug: slug,
         email: session.user.email,
       });
+      var label = document.createElement("label");
       if (res.data.success) {
-        var label = document.createElement("label");
         label.htmlFor = "my-modal-6";
         document.body.appendChild(label);
         label.classList.add("hidden");
@@ -116,7 +116,6 @@ const LoggedIn = () => {
       }
     } catch (e) {
       if (e.response.data.internalCode) {
-        var label = document.createElement("label");
         label.htmlFor = "my-modal-7";
         document.body.appendChild(label);
         label.classList.add("hidden");
