@@ -12,7 +12,7 @@ const NotLoggedIn = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState("");
-  var isValidURL = (str) => {
+  const isValidURL = (str) => {
     try {
       new URL(str);
 
@@ -36,7 +36,7 @@ const NotLoggedIn = () => {
       return;
     }
     if (!isValidURL(url)) {
-      var button = document.querySelector(".btn-primary");
+      const button = document.querySelector(".btn-primary");
       button.innerHTML = "Please enter a valid URL";
       document.querySelector(".input").classList.add("border-warning");
       button.classList.add("btn-warning");
@@ -50,10 +50,10 @@ const NotLoggedIn = () => {
       return;
     }
     const res = await axios.post("/api/new-link-signed-out", {
-      url: url,
+      url,
     });
     if (res.data.success) {
-      var label = document.createElement("label");
+      const label = document.createElement("label");
       label.htmlFor = "my-modal-6";
       document.body.appendChild(label);
       label.classList.add("hidden");
@@ -66,7 +66,7 @@ const NotLoggedIn = () => {
     setLoading(false);
   };
   const handleKeyPress = (e) => {
-    var button = document.querySelector(".btn-primary");
+    const button = document.querySelector(".btn-primary");
     if (button.disabled) return;
     if (e.key === "Enter" && url !== "") {
       createInDB();
@@ -168,7 +168,11 @@ const NotLoggedIn = () => {
           </h3>
           <p className="py-4">
             Your link is accessible at{" "}
-            <Link target={"_blank"} href={`https://www.ishn.xyz/${slug}`}>
+            <Link
+              target="_blank"
+              href={`https://www.ishn.xyz/${slug}`}
+              rel="noreferrer"
+            >
               <span className="link font-medium">ishn.xyz/{slug}</span>
             </Link>
           </p>
@@ -176,7 +180,7 @@ const NotLoggedIn = () => {
             <button
               onClick={() => {
                 navigator.clipboard.writeText(`https://www.ishn.xyz/${slug}`);
-                var copyText = document.querySelector(".copy-button-text");
+                const copyText = document.querySelector(".copy-button-text");
                 copyText.innerHTML = "Copied!";
                 setTimeout(() => {
                   copyText.innerHTML = "Copy";
@@ -192,7 +196,7 @@ const NotLoggedIn = () => {
               <span
                 className="ml-2 copy-button-text"
                 onClick={() => {
-                  var qrCodeContainer =
+                  const qrCodeContainer =
                     document.querySelector(".qr-code-container");
                   qrCodeContainer.classList.remove("hidden");
                 }}
@@ -216,13 +220,13 @@ const NotLoggedIn = () => {
             <button
               className="flex flex-row items-center copy-button ml-4"
               onClick={() => {
-                var qrCode = document.querySelector(".qr-code-container img");
-                var canvas = document.createElement("canvas");
+                const qrCode = document.querySelector(".qr-code-container img");
+                const canvas = document.createElement("canvas");
                 canvas.width = qrCode.width;
                 canvas.height = qrCode.height;
-                var ctx = canvas.getContext("2d");
+                const ctx = canvas.getContext("2d");
                 ctx.drawImage(qrCode, 0, 0);
-                var a = document.createElement("a");
+                const a = document.createElement("a");
                 a.href = canvas.toDataURL("image/png");
                 a.download = `ishn_xyz_${slug}.png`;
                 a.click();
@@ -237,7 +241,7 @@ const NotLoggedIn = () => {
           <div className="modal-action">
             <label
               onClick={() => {
-                var qrCodeContainer =
+                const qrCodeContainer =
                   document.querySelector(".qr-code-container");
                 qrCodeContainer.classList.add("hidden");
                 setUrl("");
