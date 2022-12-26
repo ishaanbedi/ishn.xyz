@@ -17,8 +17,8 @@ const handler = async (req, res) => {
   try {
     var slug = req.body.body.slug;
     var calledEmail = req.body.body.email;
-    const records = await xata.db.global_data.getAll();
-    var record = records.find((record) => record.slug === slug);
+    const allRecords = await xata.db.global_data.getAll();
+    var record = allRecords.find((record) => record.slug === slug);
     var email = record.email;
     if (email !== calledEmail) {
       res.status(401).json({ error: "Not authorized." });
