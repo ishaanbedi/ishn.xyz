@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import axios from "axios";
 import Nav from "./Nav";
 import Footer from "../components/Footer";

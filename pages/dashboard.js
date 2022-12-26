@@ -169,7 +169,7 @@ const Dashboard = () => {
                       email: session.user.email,
                     },
                   })
-                  .then((e) => {
+                  .then(() => {
                     getUserLinks();
                     var close = document.getElementById("close-modal");
                     close.click();
