@@ -7,6 +7,7 @@ import { AiOutlineLoading as Loading } from "react-icons/ai";
 import Link from "next/link";
 import Head from "next/head";
 const Dashboard = () => {
+  const { data: session } = useSession();
   const [userLinks, setUserLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hotStats, setHotStats] = useState({
@@ -34,7 +35,6 @@ const Dashboard = () => {
     label.click();
     document.body.removeChild(label);
   };
-  const { data: session } = useSession();
   useEffect(() => {
     if (session) {
       getUserLinks();

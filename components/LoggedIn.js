@@ -13,6 +13,10 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 const LoggedIn = () => {
   var { data: session } = useSession();
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [slug, setSlug] = useState("");
+
   var isValidURL = (str) => {
     try {
       new URL(str);
@@ -126,10 +130,6 @@ const LoggedIn = () => {
 
     setLoading(false);
   };
-  const [url, setUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [slug, setSlug] = useState("");
-
   return (
     <>
       <section>

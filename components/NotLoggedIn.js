@@ -12,10 +12,13 @@ import { AiOutlineLink } from "react-icons/ai";
 import React from "react";
 import Link from "next/link";
 const NotLoggedIn = () => {
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [slug, setSlug] = useState("");
   var isValidURL = (str) => {
     try {
       new URL(str);
-      
+
       return true;
     } catch (e) {
       return false;
@@ -65,9 +68,6 @@ const NotLoggedIn = () => {
     }
     setLoading(false);
   };
-  const [url, setUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [slug, setSlug] = useState("");
   const handleKeyPress = (e) => {
     var button = document.querySelector(".btn-primary");
     if (button.disabled) return;
