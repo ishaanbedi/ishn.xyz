@@ -4,18 +4,7 @@ import LoggedIn from "../components/LoggedIn";
 import Head from "next/head";
 const Home = () => {
   var { data: session } = useSession();
-  session === undefined && (
-    <header>
-      <main>
-        <Head>
-          <title>Loading...</title>
-        </Head>
-        <section>
-          <h1>Loading...</h1>
-        </section>
-      </main>
-    </header>
-  );
+  
   if (session !== null && session !== undefined) {
     return <LoggedIn user={session.user} />;
   }
