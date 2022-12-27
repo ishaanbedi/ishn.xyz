@@ -15,7 +15,6 @@ const Dashboard = () => {
     views: 0,
   });
   const [deleteButton, setDeleteButton] = useState(false);
-  console.log(session)
   const getUserLinks = async () => {
     setDeleteButton(false);
     const res = await axios.get("/api/get-content-signed-in", {
