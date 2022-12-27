@@ -28,7 +28,7 @@ const Dashboard = () => {
   };
   const showStatsModal = (link) => {
     setHotStats(link);
-    var label = document.createElement("label");
+    const label = document.createElement("label");
     label.htmlFor = "my-modal-6";
     document.body.appendChild(label);
     label.classList.add("hidden");
@@ -47,7 +47,7 @@ const Dashboard = () => {
           <h1 className="text-3xl text-center py-2 font-bold tracking-tight  sm:text-4xl">
             You are not signed in
           </h1>
-          <Link href={"/"}>
+          <Link href="/">
             <button className="btn btn-ghost">Go Home</button>
           </Link>{" "}
         </main>
@@ -78,7 +78,7 @@ const Dashboard = () => {
                   <table className="table table-zebra w-full">
                     <thead>
                       <tr className="text-center">
-                        <th></th>
+                        <th />
                         <th>ORIGINAL URL</th>
                         <th>SHORTENED URL</th>
                         <th>STATS</th>
@@ -90,12 +90,13 @@ const Dashboard = () => {
                           <td>{index + 1}</td>
                           <td>
                             <Link
-                              target={"_blank"}
+                              target="_blank"
                               href={
                                 link.url.startsWith("http")
                                   ? link.url
                                   : `http://${link.url}`
                               }
+                              rel="noreferrer"
                             >
                               {link.url.length > 20
                                 ? link.url.substring(0, 30) + "..."
@@ -103,7 +104,11 @@ const Dashboard = () => {
                             </Link>
                           </td>
                           <td>
-                            <Link target={"_blank"} href={`/${link.slug}`}>
+                            <Link
+                              target="_blank"
+                              href={`/${link.slug}`}
+                              rel="noreferrer"
+                            >
                               ishn.xyz/
                               {link.slug.length > 20
                                 ? link.slug.substring(0, 10) + "..."
@@ -127,9 +132,9 @@ const Dashboard = () => {
             ) : (
               <div className="flex flex-col justify-center items-center">
                 <p>You have no links yet.</p>
-                <Link
-                  className="btn btn-ghost"
-                 href={"/"}>Create one now</Link>
+                <Link className="btn btn-ghost" href="/">
+                  Create one now
+                </Link>
               </div>
             )}
           </>
@@ -141,7 +146,12 @@ const Dashboard = () => {
         <div className="modal-box">
           <h3 className="font-bold text-lg">
             Stats for{" "}
-            <Link className="link" target={"_blank"} href={`/${hotStats.slug}`}>
+            <Link
+              className="link"
+              target="_blank"
+              href={`/${hotStats.slug}`}
+              rel="noreferrer"
+            >
               ishn.xyz/{hotStats.slug}
             </Link>
           </h3>
@@ -149,8 +159,9 @@ const Dashboard = () => {
             This link redirects to{" "}
             <Link
               className="font-bold link"
-              target={"_blank"}
+              target="_blank"
               href={hotStats.url}
+              rel="noreferrer"
             >
               {hotStats.url.startsWith("http") ? "" : "http://"}
               {hotStats.url.length > 20
@@ -176,7 +187,7 @@ const Dashboard = () => {
                   })
                   .then(() => {
                     getUserLinks();
-                    var close = document.getElementById("close-modal");
+                    const close = document.getElementById("close-modal");
                     close.click();
                     setHotStats({
                       url: "",
