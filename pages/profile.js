@@ -10,9 +10,13 @@ const Profile = () => {
   if (!session) {
     return (
       <header>
-        <main>
-          <h1>You are not signed in</h1>
-          <Link href={"/"}>Home</Link>{" "}
+        <main className="flex flex-col h-screen justify-center items-center">
+          <h1 className="text-3xl text-center py-2 font-bold tracking-tight  sm:text-4xl">
+            You are not signed in
+          </h1>
+          <Link href={"/"}>
+            <button className="btn btn-ghost">Go Home</button>
+          </Link>{" "}
         </main>
       </header>
     );
@@ -52,12 +56,15 @@ const Profile = () => {
             <p>
               <strong>Email:</strong> {session?.user.email}
             </p>
-            <p>
-              <strong>Name:</strong> {session?.user.name}
-            </p>
+            {session?.user.name && (
+              <p>
+                <strong>Name:</strong> {session?.user.name}
+              </p>
+            )}
+
             <p
               className="mt-4 tooltip tooltip-top underline underline-offset-4"
-              data-tip="This information is provided by the authentication provider you signed in with. Other than these, we do not have any personal information about you."
+              data-tip="This information is provided by the authentication provider you signed in with. Other than the above, we do not have any personal information about you."
             >
               About these details
             </p>
@@ -96,7 +103,7 @@ const Profile = () => {
             </Link>
           </div>
           <button
-            className={`btn mt-12 ${loading ? "loading" : "btn-primary"}`}
+            className={`mt-12 ${loading ? "btn loading" : "btn"}`}
             onClick={() => {
               setLoading(true);
               signOut();

@@ -125,10 +125,12 @@ const Dashboard = () => {
                 </div>
               </>
             ) : (
-              <>
+              <div className="flex flex-col justify-center items-center">
                 <p>You have no links yet.</p>
-                <Link href={"/"}>Create one now</Link>
-              </>
+                <Link
+                  className="btn btn-ghost"
+                 href={"/"}>Create one now</Link>
+              </div>
             )}
           </>
         )}
