@@ -7,13 +7,13 @@ const Nav = () => {
   return (
     <div className="navbar pt-6 lg:md:px-24">
       <div className="navbar-start">
-        <span className="btn btn-ghost normal-case text-xl">
-          <Link href="/">
+        <Link href="/">
+          <span className="btn btn-ghost normal-case text-xl">
             <code>
               <samp>ishn.xyz</samp>
             </code>
-          </Link>
-        </span>
+          </span>
+        </Link>
       </div>
       <div className="navbar-end">
         {session ? (

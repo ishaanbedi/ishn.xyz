@@ -25,26 +25,26 @@ const NotLoggedIn = () => {
     setLoading(true);
     if (url === "") {
       setLoading(false);
-      document.querySelector(".input").classList.add("border-warning");
+      document.querySelector(".input").classList.add("border-error");
       document.querySelector(".btn-primary").innerHTML = "Please enter a URL";
-      document.querySelector(".btn-primary").classList.add("btn-warning");
+      document.querySelector(".btn-primary").classList.add("btn-error");
       setTimeout(() => {
-        document.querySelector(".input").classList.remove("border-warning");
+        document.querySelector(".input").classList.remove("border-error");
         document.querySelector(".btn-primary").innerHTML = "Shorten";
-        document.querySelector(".btn-primary").classList.remove("btn-warning");
+        document.querySelector(".btn-primary").classList.remove("btn-error");
       }, 2000);
       return;
     }
     if (!isValidURL(url)) {
       var button = document.querySelector(".btn-primary");
       button.innerHTML = "Please enter a valid URL";
-      document.querySelector(".input").classList.add("border-warning");
-      button.classList.add("btn-warning");
+      document.querySelector(".input").classList.add("border-error");
+      button.classList.add("btn-error");
       setTimeout(() => {
         button.disabled = false;
         button.innerHTML = "Shorten";
-        document.querySelector(".input").classList.remove("border-warning");
-        button.classList.remove("btn-warning");
+        document.querySelector(".input").classList.remove("border-error");
+        button.classList.remove("btn-error");
       }, 2000);
       setLoading(false);
       return;
@@ -93,7 +93,7 @@ const NotLoggedIn = () => {
                 ishn.xyz | Link Shortener
               </h1>
 
-              <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+              <p className="mx-auto mt-4 max-w-md text-center">
                 Generate, customize, track, and share your links. Blazing fast
               </p>
               <form
@@ -123,7 +123,7 @@ const NotLoggedIn = () => {
                       className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-4 inline-flex items-center">
-                      <AiOutlineLink className="text-gray-400" />
+                      <AiOutlineLink />
                     </span>
                   </div>
                 </div>

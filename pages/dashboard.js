@@ -5,6 +5,7 @@ import Nav from "../components/Nav";
 import { AiOutlineLoading as Loading, AiFillEye as Eye } from "react-icons/ai";
 import Link from "next/link";
 import Head from "next/head";
+import Footer from "../components/Footer";
 const Dashboard = () => {
   const { data: session } = useSession();
   const [userLinks, setUserLinks] = useState([]);
@@ -61,25 +62,20 @@ const Dashboard = () => {
           <title>Dashboard</title>
         </Head>
         <Nav />
-        <h1 className="text-3xl text-center py-2 font-bold tracking-tight  sm:text-4xl">
+        <h1 className="text-3xl text-center pt-4 pb-12 font-bold tracking-tight  sm:text-4xl">
           Dashboard
         </h1>
 
         {loading ? (
-          <p className="text-2xl flex flex-row space-x-3 justify-center items-center">
-            Loading
+          <div className="text-2xl flex h-screen justify-center items-center">
             <Loading className="animate-spin ml-3" />
-          </p>
+          </div>
         ) : (
           <>
             {userLinks && userLinks.length > 0 ? (
               <>
                 <div className="overflow-x-auto">
-                  <p className="py-2 text-center lg:md:sm:hidden text-sm text-gray-500">
-                    (Drag across the table to see more)
-                  </p>
-
-                  <table className=" px-3 table table-zebra w-full">
+                  <table className="table table-zebra w-full">
                     <thead>
                       <tr className="text-center">
                         <th></th>
@@ -142,11 +138,18 @@ const Dashboard = () => {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">
-            Stats for ishn.xyz/{hotStats.slug}
+            Stats for{" "}
+            <Link className="link" target={"_blank"} href={`/${hotStats.slug}`}>
+              ishn.xyz/{hotStats.slug}
+            </Link>
           </h3>
           <h5>
             This link redirects to{" "}
-            <Link className="font-bold" target={"_blank"} href={hotStats.url}>
+            <Link
+              className="font-bold link"
+              target={"_blank"}
+              href={hotStats.url}
+            >
               {hotStats.url.startsWith("http") ? "" : "http://"}
               {hotStats.url.length > 20
                 ? hotStats.url.substring(0, 30) + "..."
@@ -159,6 +162,7 @@ const Dashboard = () => {
           </p>
           <div>
             <button
+              disabled={deleteButton}
               onClick={() => {
                 setDeleteButton(!deleteButton);
                 axios

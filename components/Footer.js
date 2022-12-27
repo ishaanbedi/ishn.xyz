@@ -8,7 +8,7 @@ const Footer = () => {
           <p>
             With ❤️ by{" "}
             <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
+              className="text-primary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/ishn"
               target={"_blank"}
             >
@@ -18,7 +18,7 @@ const Footer = () => {
           <p>
             Built with{" "}
             <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
+              className="text-primary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/nextjs"
               target={"_blank"}
             >
@@ -26,7 +26,7 @@ const Footer = () => {
             </Link>
             &nbsp;and{" "}
             <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
+              className="text-primary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/xata"
               target={"_blank"}
             >
@@ -34,7 +34,7 @@ const Footer = () => {
             </Link>
             . Shipped with{" "}
             <Link
-              className="text-secondary font-bold hover:underline underline-offset-2"
+              className="text-primary font-bold hover:underline underline-offset-2"
               href="https://www.ishn.xyz/vercel"
               target={"_blank"}
             >

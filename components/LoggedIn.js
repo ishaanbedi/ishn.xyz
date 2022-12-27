@@ -27,25 +27,25 @@ const LoggedIn = () => {
     setLoading(true);
     if (url === "") {
       setLoading(false);
-      document.getElementById("url-input").classList.add("border-warning");
+      document.getElementById("url-input").classList.add("border-error");
       document.querySelector(".btn-primary").innerHTML = "Please enter a URL";
-      document.querySelector(".btn-primary").classList.add("btn-warning");
+      document.querySelector(".btn-primary").classList.add("btn-error");
       setTimeout(() => {
-        document.getElementById("url-input").classList.remove("border-warning");
+        document.getElementById("url-input").classList.remove("border-error");
         document.querySelector(".btn-primary").innerHTML = "Shorten";
-        document.querySelector(".btn-primary").classList.remove("btn-warning");
+        document.querySelector(".btn-primary").classList.remove("btn-error");
       }, 2000);
       return;
     }
     if (!isValidURL(url)) {
       var button = document.querySelector(".btn-primary");
       button.innerHTML = "Please enter a valid URL";
-      document.getElementById("url-input").classList.add("border-warning");
-      button.classList.add("btn-warning");
+      document.getElementById("url-input").classList.add("border-error");
+      button.classList.add("btn-error");
       setTimeout(() => {
         button.innerHTML = "Shorten";
-        document.getElementById("url-input").classList.remove("border-warning");
-        button.classList.remove("btn-warning");
+        document.getElementById("url-input").classList.remove("border-error");
+        button.classList.remove("btn-error");
       }, 2000);
       setLoading(false);
       return;
@@ -56,14 +56,14 @@ const LoggedIn = () => {
         if (!allowedChars.includes(slug[i])) {
           var button = document.querySelector(".btn-primary");
           button.innerHTML = "Invalid characters in slug";
-          document.getElementById("slug-input").classList.add("border-warning");
-          button.classList.add("btn-warning");
+          document.getElementById("slug-input").classList.add("border-error");
+          button.classList.add("btn-error");
           setTimeout(() => {
             button.innerHTML = "Shorten";
-            button.classList.remove("btn-warning");
+            button.classList.remove("btn-error");
             document
               .getElementById("slug-input")
-              .classList.remove("border-warning");
+              .classList.remove("border-error");
           }, 2000);
           setLoading(false);
           return;
@@ -72,14 +72,14 @@ const LoggedIn = () => {
       if (slug.length < 4) {
         var button = document.querySelector(".btn-primary");
         button.innerHTML = "Slug must be at least 4 characters";
-        document.getElementById("slug-input").classList.add("border-warning");
-        button.classList.add("btn-warning");
+        document.getElementById("slug-input").classList.add("border-error");
+        button.classList.add("btn-error");
         setTimeout(() => {
           button.innerHTML = "Shorten";
           document
             .getElementById("slug-input")
-            .classList.remove("border-warning");
-          button.classList.remove("btn-warning");
+            .classList.remove("border-error");
+          button.classList.remove("btn-error");
         }, 2000);
         setLoading(false);
         return;
@@ -87,14 +87,14 @@ const LoggedIn = () => {
       if (slug.length > 20) {
         var button = document.querySelector(".btn-primary");
         button.innerHTML = "Slug must be at most 20 characters";
-        document.getElementById("slug-input").classList.add("border-warning");
-        button.classList.add("btn-warning");
+        document.getElementById("slug-input").classList.add("border-error");
+        button.classList.add("btn-error");
         setTimeout(() => {
           button.innerHTML = "Shorten";
-          button.classList.remove("btn-warning");
+          button.classList.remove("btn-error");
           document
             .getElementById("slug-input")
-            .classList.remove("border-warning");
+            .classList.remove("border-error");
         }, 2000);
         setLoading(false);
         return;
@@ -141,7 +141,7 @@ const LoggedIn = () => {
                 ishn.xyz | Link Shortener
               </h1>
 
-              <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+              <p className="mx-auto mt-4 max-w-md text-center">
                 Generate, customize, track, and share your links. Blazing fast
               </p>
               <form
@@ -174,7 +174,7 @@ const LoggedIn = () => {
                       className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-4 inline-flex items-center">
-                      <AiOutlineLink className="text-gray-400" />
+                      <AiOutlineLink className="text-base-content" />
                     </span>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ const LoggedIn = () => {
                       className="input input-bordered w-full rounded-lg p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-4 inline-flex items-center">
-                      <BsFillPencilFill className="text-gray-400" />
+                      <BsFillPencilFill className="text-base-content" />
                     </span>
                   </div>
                 </div>

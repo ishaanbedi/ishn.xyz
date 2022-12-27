@@ -43,7 +43,7 @@ const Profile = () => {
             </div>
           </figure>
 
-          <h3 className="text-center text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          <h3 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
             Welcome,{" "}
             {session?.user.name ? session?.user.name : session?.user.email}
           </h3>
@@ -53,7 +53,7 @@ const Profile = () => {
               <strong>Email:</strong> {session?.user.email}
             </p>
             <p>
-              <strong>Username:</strong> {session?.user.name}
+              <strong>Name:</strong> {session?.user.name}
             </p>
             <p
               className="mt-4 tooltip tooltip-top underline underline-offset-4"
@@ -64,21 +64,45 @@ const Profile = () => {
           </details>
           <details>
             <summary>Danger Zone</summary>
-            <p className="py-4 text-warning">
+            <p className="py-4 text-error">
               <Link href="/request-deletion">Request account deletion</Link>
             </p>
           </details>
           <p className="my-4 font-bold hover:underline underline-offset-2">
             <Link href="/report">Report offensive content</Link>
           </p>
+          <div>
+            <Link
+              target="_blank"
+              href="https://www.github.com/ishaanbedi/ishn.xyz/"
+            >
+              <button className="btn gap-2">
+                Star us on GitHub
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </button>
+            </Link>
+          </div>
           <button
-            className="btn mt-12"
+            className={`btn mt-12 ${loading ? "loading" : "btn-primary"}`}
             onClick={() => {
               setLoading(true);
               signOut();
             }}
           >
-            {loading ? "Signing out..." : "Sign out"}
+            Sign out
           </button>
         </div>
       </main>
