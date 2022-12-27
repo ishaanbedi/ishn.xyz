@@ -1,18 +1,24 @@
-# ishn.xyz
+# ishn.xyz - Link Shortener
 
----
 
-Welcome to ishn.xyz, a minimal link shortener built with [Next.js](https://nextjs.org/) and [Xata](https://xata.io/).
-
----
+A fast, feature-rich, completely free link shortener built with Next.js, Tailwind, Xata, SendGrid, and DaisyUI. 
 
 ## Features
 
-- Shorten long links into shorter, more memorable ones.
-- Custom URL generation: Choose your own URL slug and customize it to your liking.
-- Link tracking: See how many clicks your links are getting.
-- Blazing fast: Built to be fast, thanks to serverless magic, so you can create and share your links quickly.
+- Custom slugs for shortened links
+- Dashboard with link-clicks tracking
+- QR code generation for generated links
+- Neat and clean UI, thanks to DaisyUI
+- Fast performance, thanks to serverless database architecture of Xata and server-side capabilities of Next.js
+
+## Support
+If you have any questions or need assistance, please don't hesitate to reach out to me at hi@ishaanbedi.in
 
 ## License
+ishn.xyz is licensed under the MIT License.
 
-ishn.xyz is released under the MIT license.
+## Website
+Visit the ishn.xyz website at https://ishn.xyz.
+
+
+
