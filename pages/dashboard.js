@@ -5,7 +5,6 @@ import Nav from "../components/Nav";
 import { AiOutlineLoading as Loading, AiFillEye as Eye } from "react-icons/ai";
 import Link from "next/link";
 import Head from "next/head";
-import Footer from "../components/Footer";
 const Dashboard = () => {
   const { data: session } = useSession();
   const [userLinks, setUserLinks] = useState([]);
@@ -16,6 +15,7 @@ const Dashboard = () => {
     views: 0,
   });
   const [deleteButton, setDeleteButton] = useState(false);
+  console.log(session)
   const getUserLinks = async () => {
     setDeleteButton(false);
     const res = await axios.get("/api/get-content-signed-in", {
