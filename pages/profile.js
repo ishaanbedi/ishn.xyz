@@ -12,7 +12,7 @@ const Profile = () => {
       <header>
         <main>
           <h1>You are not signed in</h1>
-          <Link href={"/"}>Home</Link>{" "}
+          <Link href="/">Home</Link>{" "}
         </main>
       </header>
     );
@@ -75,6 +75,7 @@ const Profile = () => {
             <Link
               target="_blank"
               href="https://www.github.com/ishaanbedi/ishn.xyz/"
+              rel="noreferrer"
             >
               <button className="btn gap-2">
                 Star us on GitHub
