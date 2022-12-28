@@ -1,6 +1,6 @@
 # ishn.xyz - Link Shortener
 
-A fast, feature-rich, completely free link shortener built with Next.js, Tailwind, Xata, SendGrid, and DaisyUI.
+A fast, feature-rich, completely free link shortener built with Next.js, Tailwind, Xata, Nextauth.js, SendGrid, and DaisyUI.
 
 ## Features
 
