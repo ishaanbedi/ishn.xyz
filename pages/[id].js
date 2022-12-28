@@ -13,8 +13,8 @@ const Shorter = () => {
 export default Shorter;
 export const getServerSideProps = async (context) => {
   const xata = getXataClient();
-  var data = await xata.db.global_data.getAll();
-  var temp = data.filter((item) => item.slug === context.params.id);
+  const data = await xata.db.global_data.getAll();
+  const temp = data.filter((item) => item.slug === context.params.id);
   if (temp.length === 0) {
     return {
       redirect: {
@@ -23,15 +23,15 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
-  var array = JSON.parse(temp[0].countries);
-  var country = await axios
+  const array = JSON.parse(temp[0].countries);
+  const country = await axios
     .get("https://ipapi.co/json/")
     .then((response) => {
-      let data = response.data;
-      var flag = `https://countryflagsapi.com/png/${data.country_name.toLowerCase()}`;
+      const data = response.data;
+      const flag = `https://countryflagsapi.com/png/${data.country_name.toLowerCase()}`;
       return {
         country: data.country_name,
-        flag: flag,
+        flag,
       };
     })
     .catch((error) => {
@@ -40,16 +40,16 @@ export const getServerSideProps = async (context) => {
   if (!array.includes(country)) {
     array.push(country);
   }
-  var url = temp[0].url;
+  let url = temp[0].url;
   if (!/^https?:\/\//i.test(url)) {
     url = "http://" + url;
   }
-  var record = data.filter((item) => item.slug === context.params.id);
-  var id = record[0].id;
-  var views = record[0].views;
+  let record = data.filter((item) => item.slug === context.params.id);
+  const id = record[0].id;
+  let views = record[0].views;
   views = views + 1;
   record = await xata.db.global_data.update(id, {
-    views: views,
+    views,
     countries: JSON.stringify(array),
   });
   return {
