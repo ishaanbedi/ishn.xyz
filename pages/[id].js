@@ -1,5 +1,6 @@
 import React from "react";
 import { getXataClient } from "../xata";
+import axios from "axios";
 const Shorter = () => {
   return (
     <h3>
@@ -22,6 +23,23 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+  var array = JSON.parse(temp[0].countries);
+  var country = await axios
+    .get("https://ipapi.co/json/")
+    .then((response) => {
+      let data = response.data;
+      var flag = `https://countryflagsapi.com/png/${data.country_name.toLowerCase()}`;
+      return {
+        country: data.country_name,
+        flag: flag,
+      };
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  if (!array.includes(country)) {
+    array.push(country);
+  }
   var url = temp[0].url;
   if (!/^https?:\/\//i.test(url)) {
     url = "http://" + url;
@@ -32,6 +50,7 @@ export const getServerSideProps = async (context) => {
   views = views + 1;
   record = await xata.db.global_data.update(id, {
     views: views,
+    countries: JSON.stringify(array),
   });
   return {
     redirect: {
