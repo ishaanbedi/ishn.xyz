@@ -78,6 +78,12 @@ const Profile = () => {
           <p className="my-4 font-bold hover:underline underline-offset-2">
             <Link href="/report">Report offensive content</Link>
           </p>
+          <p className="my-4 font-bold hover:underline underline-offset-2">
+            <Link href="/legal/privacy-policy">Application&apos;s policy.</Link>
+          </p>
+          <p className="my-4 font-bold hover:underline underline-offset-2">
+            <Link href="/legal/terms">Application&apos;s terms.</Link>
+          </p>
           <div>
             <Link
               target="_blank"

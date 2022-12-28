@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="hidden md:block">
-      <footer className="py-3 absolute bottom-2 w-screen">
+      <footer className="pt-3 absolute bottom-2 w-screen">
         <center>
           <p>
             With ❤️ by{" "}
@@ -42,6 +42,16 @@ const Footer = () => {
             </Link>
             .
           </p>
+          <div className="flex text-xs flex-row justify-center space-x-3">
+            <p className="font-bold hover:underline underline-offset-2">
+              <Link href="/legal/privacy-policy">
+                Application&apos;s policy
+              </Link>
+            </p>
+            <p className="font-bold hover:underline underline-offset-2">
+              <Link href="/legal/terms">Application&apos;s terms</Link>
+            </p>
+          </div>
         </center>
       </footer>
     </div>
