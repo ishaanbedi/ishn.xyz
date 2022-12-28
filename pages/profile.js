@@ -14,7 +14,7 @@ const Profile = () => {
           <h1 className="text-3xl text-center py-2 font-bold tracking-tight  sm:text-4xl">
             You are not signed in
           </h1>
-          <Link href={"/"}>
+          <Link href="/">
             <button className="btn btn-ghost">Go Home</button>
           </Link>{" "}
         </main>
@@ -88,6 +88,7 @@ const Profile = () => {
             <Link
               target="_blank"
               href="https://www.github.com/ishaanbedi/ishn.xyz/"
+              rel="noreferrer"
             >
               <button className="btn gap-2">
                 Star us on GitHub
