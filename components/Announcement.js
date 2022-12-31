@@ -21,11 +21,12 @@ const Announcement = () => {
         We just released a new API to make it easier to generate short URLs.{" "}
         <Link
           className="underline-offset-4 link"
-          target={"_blank"}
+          target="_blank"
           href="https://api.ishn.xyz"
+          rel="noreferrer"
         >
           Check it out
-          {<Arrow className="inline-block ml-1" />}
+          <Arrow className="inline-block ml-1" />
         </Link>
       </p>
 
