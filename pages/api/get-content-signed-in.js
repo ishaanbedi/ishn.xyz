@@ -17,8 +17,8 @@ const handler = async (req, res) => {
     res.status(401).json({ error: "Not authorized." });
     return;
   }
-  const record = await xata.db.global_data.filter("email", params.email).getAll();
-
+  var record = await xata.db.global_data.filter("email", params.email).getAll();
+  record = record.reverse();
   res.status(200).json(record);
 };
 export default handler;
