@@ -7,7 +7,7 @@ const Home = () => {
   const { status } = useSession();
   return (
     <>
-      <Announcement className="hidden" />
+      {/* <Announcement/> */}
       {status === "loading" && <LoadingHero />}
       {status === "unauthenticated" && <NotLoggedIn />}
       {status === "authenticated" && <LoggedIn />}
