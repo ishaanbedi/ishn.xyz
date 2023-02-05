@@ -1,17 +1,17 @@
-import { useSession } from "next-auth/react";
-import NotLoggedIn from "../components/NotLoggedIn";
-import LoggedIn from "../components/LoggedIn";
-import LoadingHero from "../components/LoadingHero";
-import Announcement from "../components/Announcement";
+import { useSession } from 'next-auth/react'
+import NotLoggedIn from '../components/NotLoggedIn'
+import LoggedIn from '../components/LoggedIn'
+import LoadingHero from '../components/LoadingHero'
+import Announcement from '../components/Announcement'
 const Home = () => {
-  const { status } = useSession();
+  const { status } = useSession()
   return (
     <>
-      <Announcement className="hidden" />
-      {status === "loading" && <LoadingHero />}
-      {status === "unauthenticated" && <NotLoggedIn />}
-      {status === "authenticated" && <LoggedIn />}
+      <Announcement className='hidden' />
+      {status === 'loading' && <LoadingHero />}
+      {status === 'unauthenticated' && <NotLoggedIn />}
+      {status === 'authenticated' && <LoggedIn />}
     </>
-  );
-};
-export default Home;
+  )
+}
+export default Home
